@@ -63,7 +63,9 @@ function App() {
   return (
     <div className="p-8 max-w-2xl mx-auto">
       <Toaster />
-      <h1 className="text-3xl font-semibold text-center mb-6">RefLink </h1>
+      <h1 className="text-3xl font-semibold text-center mb-2">RefLink</h1>
+      <h3 className="font-mono text-center mb-6 italic">A simple app to make it easier for you to create personalized invites and referral messages on the go!
+      </h3>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
