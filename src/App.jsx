@@ -197,9 +197,11 @@ function App() {
                 className="mt-2 w-full resize-none p-2 border rounded-lg"
                 style={{ minHeight: "100px", maxHeight: "auto" }}
               />
-              <span className="absolute bottom-2 right-2 text-sm text-gray-500">
-                {linkedinInvite.length} characters
-              </span>
+              <div className="flex justify-end px-2">
+                <span className="text-sm text-gray-500 ">
+                  {linkedinInvite.length} characters
+                </span>
+              </div>
             </div>
             <Button
               onClick={() => handleCopy(linkedinInvite)}
@@ -213,15 +215,17 @@ function App() {
 
           <div className="p-4 bg-gray-100 border rounded-lg">
             <h3 className="font-semibold text-lg">LinkedIn Referral:</h3>
-            <div className="relative">
+            <div>
               <textarea
                 value={linkedinReferral}
                 className="mt-2 w-full resize-none p-2 border rounded-lg"
                 style={{ minHeight: "100px", maxHeight: "auto" }}
               />
-              <span className="absolute bottom-2 right-2 text-sm text-gray-500">
-                {linkedinReferral.length} characters
-              </span>
+              <div className="flex justify-end px-2">
+                <span className="text-sm text-gray-500 ">
+                  {linkedinReferral.length} characters
+                </span>
+              </div>
             </div>
             <Button
               onClick={() => handleCopy(linkedinReferral)}
