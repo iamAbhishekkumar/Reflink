@@ -7,12 +7,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import LinkedInContentSelector from "@/components/linkedinContentSelector";
 
 const formSchema = z.object({
   name: z.string().min(1, "Your name is required"),
-  recipientName: z.string(),
-  company: z.string().min(1, "Company name is required"),
-  position: z.string().min(1, "Position is required"),
+  recipientName: z.string().optional(),
+  company: z.string().optional(),
+  position: z.string().optional(),
   jobId: z.string().optional(),
   jobUrl: z
     .string()
@@ -39,10 +40,10 @@ function App() {
 
   const onSubmit = (data) => {
     const { name, recipientName, company, position, jobId, jobUrl } = data;
-
+    let recipent = recipientName != null ? ` ${recipientName}, ` : ", ";
     // Updated invite string format
-    const invite = `Hi ${recipientName}, I’m ${name}, with a keen interest in the work at ${company}. I’m eager to join as a ${position} and would love to connect and learn from your experiences.`;
-    const referral = `Hi ${recipientName}, thank you for connecting! I’m very interested in the ${position} role at ${company} (Job ID: ${jobId}). I believe my skills align well with the position. Here’s the job URL: ${jobUrl}. I’d greatly appreciate it if you could refer me for this opportunity. Please let me know if I can share my resume or any other details to help with the process. Thanks again for your time and support!`;
+    const invite = `Hi${recipent}I’m ${name}, I came across your profile and would love to connect! Looking forward to exchanging ideas and learning from your experiences. 🚀`;
+    const referral = `Hi${recipent}thank you for connecting! I’m very interested in the ${position} role at ${company} (Job ID: ${jobId}). I believe my skills align well with the position. Here’s the job URL: ${jobUrl}. I’d greatly appreciate it if you could refer me for this opportunity. Please let me know if I can share my resume or any other details to help with the process. Thanks again for your time and support!`;
 
     setLinkedinInvite(invite);
     setLinkedinReferral(referral);
@@ -183,61 +184,14 @@ function App() {
             Generate Snippets
           </Button>
         </div>
+        {
+          <LinkedInContentSelector
+            handleCopy={handleCopy}
+            linkedinInvite={linkedinInvite}
+            linkedinReferral={linkedinReferral}
+          />
+        }
       </form>
-
-      {(linkedinInvite || linkedinReferral) && (
-        <div className="mt-6 space-y-4">
-          <div className="p-4 bg-gray-100 border rounded-lg">
-            <h3 className="font-semibold text-lg">
-              LinkedIn Personalized Invite:
-            </h3>
-            <div className="relative">
-              <textarea
-                value={linkedinInvite}
-                className="mt-2 w-full resize-none p-2 border rounded-lg"
-                style={{ minHeight: "100px", maxHeight: "auto" }}
-              />
-              <div className="flex justify-end px-2">
-                <span className="text-sm text-gray-500 ">
-                  {linkedinInvite.length} characters
-                </span>
-              </div>
-            </div>
-            <Button
-              onClick={() => handleCopy(linkedinInvite)}
-              className="mt-2 w-full"
-              variant="outline"
-            >
-              <ClipboardIcon className="mr-2" />
-              Copy Invite
-            </Button>
-          </div>
-
-          <div className="p-4 bg-gray-100 border rounded-lg">
-            <h3 className="font-semibold text-lg">LinkedIn Referral:</h3>
-            <div>
-              <textarea
-                value={linkedinReferral}
-                className="mt-2 w-full resize-none p-2 border rounded-lg"
-                style={{ minHeight: "100px", maxHeight: "auto" }}
-              />
-              <div className="flex justify-end px-2">
-                <span className="text-sm text-gray-500 ">
-                  {linkedinReferral.length} characters
-                </span>
-              </div>
-            </div>
-            <Button
-              onClick={() => handleCopy(linkedinReferral)}
-              className="mt-2 w-full"
-              variant="outline"
-            >
-              <ClipboardIcon className="mr-2" />
-              Copy Referral
-            </Button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
