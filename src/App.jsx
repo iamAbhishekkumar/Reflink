@@ -35,7 +35,9 @@ function App() {
   });
 
   const [linkedinInvite, setLinkedinInvite] = useState("");
-  const [linkedinReferral, setLinkedinReferral] = useState("");
+  const [linkedinReferralAfterConnecting, setLinkedinReferralAfterConnecting] =
+    useState("");
+  const [linkedinReferralAgain, setLinkedinReferralAgain] = useState("");
   const { toast } = useToast();
 
   const onSubmit = (data) => {
@@ -43,10 +45,12 @@ function App() {
     let recipent = recipientName != null ? ` ${recipientName}, ` : ", ";
     // Updated invite string format
     const invite = `Hi${recipent}I’m ${name}, I came across your profile and would love to connect! Looking forward to exchanging ideas and learning from your experiences. 🚀`;
-    const referral = `Hi${recipent}thank you for connecting! I’m very interested in the ${position} role at ${company} (Job ID: ${jobId}). I believe my skills align well with the position. Here’s the job URL: ${jobUrl}. I’d greatly appreciate it if you could refer me for this opportunity. Please let me know if I can share my resume or any other details to help with the process. Thanks again for your time and support!`;
+    const referralAfterConnecting = `Hi${recipent}thank you for connecting! I’m very interested in the ${position} role at ${company} (Job ID: ${jobId}). I believe my skills align well with the position. Here’s the job URL: ${jobUrl}. I’d greatly appreciate it if you could refer me for this opportunity. Please let me know if I can share my resume or any other details to help with the process. Thanks again for your time and support!`;
+    const referralAgain = `Hi ${recipent}\nI hope you're doing well! I’m reaching out because I’m very interested in the ${position} role at ${company} (Job ID: ${jobId}). I believe my background and skills align well with this opportunity.\nHere’s the job posting: ${jobUrl}. If you’re able to refer me for this position, I’d be incredibly grateful. Please let me know if I can provide any additional information or my resume to assist with the process.\n\nThanks again for your time and support!\n\nBest regards,\n${name}`;
 
     setLinkedinInvite(invite);
-    setLinkedinReferral(referral);
+    setLinkedinReferralAfterConnecting(referralAfterConnecting);
+    setLinkedinReferralAgain(referralAgain);
   };
 
   const showToast = () => {
@@ -188,7 +192,8 @@ function App() {
           <LinkedInContentSelector
             handleCopy={handleCopy}
             linkedinInvite={linkedinInvite}
-            linkedinReferral={linkedinReferral}
+            linkedinReferralAfterConnecting={linkedinReferralAfterConnecting}
+            linkedinAgain={linkedinReferralAgain}
           />
         }
       </form>

@@ -11,7 +11,8 @@ import { ClipboardIcon } from "lucide-react";
 
 export default function LinkedInContentSelector({
   linkedinInvite,
-  linkedinReferral,
+  linkedinReferralAfterConnecting,
+  linkedinAgain,
   handleCopy,
 }) {
   const [selectedOption, setSelectedOption] = useState("referral"); // Tracks dropdown selection
@@ -27,7 +28,10 @@ export default function LinkedInContentSelector({
           <SelectValue placeholder="Select Content" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="referral">LinkedIn Referral</SelectItem>
+          <SelectItem value="referral">
+            LinkedIn Referral After Connecting
+          </SelectItem>
+          <SelectItem value="referralAgain">LinkedIn Referral Again</SelectItem>
           <SelectItem value="invite">LinkedIn Personalized Invite</SelectItem>
         </SelectContent>
       </Select>
@@ -64,18 +68,42 @@ export default function LinkedInContentSelector({
         <div className="p-4 bg-gray-100 border rounded-lg">
           <h3 className="font-semibold text-lg">LinkedIn Referral:</h3>
           <textarea
-            value={linkedinReferral}
+            value={linkedinReferralAfterConnecting}
             className="mt-2 w-full resize-none p-2 border rounded-lg"
             style={{ minHeight: "100px" }}
             readOnly
           />
           <div className="flex justify-end px-2">
             <span className="text-sm text-gray-500">
-              {linkedinReferral.length} characters
+              {linkedinReferralAfterConnecting.length} characters
             </span>
           </div>
           <Button
-            onClick={() => handleCopy(linkedinReferral)}
+            onClick={() => handleCopy(linkedinReferralAfterConnecting)}
+            className="mt-2 w-full"
+            variant="outline"
+          >
+            <ClipboardIcon className="mr-2" />
+            Copy Referral
+          </Button>
+        </div>
+      )}
+      {selectedOption === "referralAgain" && (
+        <div className="p-4 bg-gray-100 border rounded-lg">
+          <h3 className="font-semibold text-lg">LinkedIn Referral:</h3>
+          <textarea
+            value={linkedinAgain}
+            className="mt-2 w-full resize-none p-2 border rounded-lg"
+            style={{ minHeight: "100px" }}
+            readOnly
+          />
+          <div className="flex justify-end px-2">
+            <span className="text-sm text-gray-500">
+              {linkedinAgain.length} characters
+            </span>
+          </div>
+          <Button
+            onClick={() => handleCopy(linkedinAgain)}
             className="mt-2 w-full"
             variant="outline"
           >
